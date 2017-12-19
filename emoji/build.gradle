@@ -1,0 +1,32 @@
+apply plugin: 'com.android.library'
+
+afterEvaluate {
+  generateReleaseBuildConfig.enabled = false
+}
+
+android {
+  compileSdkVersion rootProject.ext.compileSdkVersion as int
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_7
+    targetCompatibility JavaVersion.VERSION_1_7
+  }
+
+  defaultConfig {
+    minSdkVersion rootProject.ext.minSdkVersion as int
+  }
+
+  resourcePrefix 'emoji'
+}
+
+dependencies {
+  api rootProject.ext.supportAppCompat
+  api rootProject.ext.supportCardView
+
+  testImplementation rootProject.ext.testing.junit
+  testImplementation rootProject.ext.testing.assertJ
+  testImplementation rootProject.ext.testing.robolectric
+  testImplementation rootProject.ext.testing.privateConstructor
+}
+
+apply from: rootProject.file('gradle/gradle-mvn-push.gradle')
